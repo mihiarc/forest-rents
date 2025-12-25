@@ -6,10 +6,50 @@ This document tracks known data gaps and potential sources for expanding the uni
 
 | State | Current Coverage | Gap | Solution | Priority |
 |-------|-----------------|-----|----------|----------|
+| **New Hampshire** | 1985-2011 | 2012-2024 | Manual download from NH DRA | High |
 | **Tennessee** | 2003-2017 | 2018-present | TimberMart-South (paid) | High |
 | **Kentucky** | 2024 Q3-Q4 only | Historical (pre-2024), OCR needed | OCR for PDFs, contact state | Medium |
 | **California** | 2019-2025 | 2009-2018 | Contact CDTFA | Medium |
 | **Georgia** | 2024-2025 | Historical | TimberMart-South or UGA | Low |
+
+---
+
+## New Hampshire
+
+### Current Status
+- **Coverage**: 1985-2011 (Figshare/NHTOA Timber Crier data)
+- **Gap**: 2012-2024 (13 years)
+
+### Issue
+The NH Department of Revenue Administration (DRA) publishes semi-annual stumpage values, but their website has **Akamai bot protection** that blocks automated downloads. Data exists for 2021-2025 online but must be downloaded manually via browser.
+
+### Potential Solutions
+
+1. **Manual Download (2021-2025)** - IMMEDIATE
+   - URL: https://www.revenue.nh.gov/taxes-glance/timber-tax/average-stumpage-value-information
+   - Download all available PDFs via browser
+   - Save to `data/raw/nh_dra/pdfs/`
+   - Run parser: `uv run python scripts/parse_nh_dra_stumpage.py`
+
+2. **Request Historical Data (2012-2020)**
+   - Contact: NH DRA Property Appraisal Division
+   - Phone: (603) 203-5950
+   - Email: Forms@dra.nh.gov
+   - Request: Archived Average Stumpage Value PDFs
+
+3. **NHTOA Quarterly Survey**
+   - Contact: cbirch@nhtoa.org
+   - May have compiled data from their quarterly surveys
+
+### Data Format (NH DRA PDFs)
+- Semi-annual publication (Apr-Sep, Oct-Mar)
+- Three regions: Northern, Central, Southern NH
+- Low and high stumpage values by species
+- Units: $/MBF, $/Cord, $/Ton
+
+### References
+- [NH DRA Stumpage Values](https://www.revenue.nh.gov/taxes-glance/timber-tax/average-stumpage-value-information)
+- [USFS NH Timber Price Info](https://research.fs.usda.gov/srs/centers/fep/timbernh)
 
 ---
 
