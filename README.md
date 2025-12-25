@@ -1,10 +1,10 @@
-# Forest Land Rents Dataset
+# Timber Prices Dataset
 
-County-level net returns for timberland across the contiguous United States.
+Stumpage price data collection for US timberland across the contiguous United States.
 
 ## Overview
 
-This project estimates forest land rents using the Ricardian framework from Mihiar & Lewis (2021), updating the methodology with modern data sources.
+This project collects and standardizes timber stumpage price data from 18+ state and federal sources to build a unified national dataset for economic analysis.
 
 ### Theoretical Foundation
 
@@ -34,7 +34,7 @@ This project estimates forest land rents using the Ricardian framework from Mihi
 ```bash
 # Clone repository
 git clone <repository-url>
-cd forest-rents
+cd timber-prices
 
 # Create virtual environment and install
 uv venv
@@ -59,7 +59,7 @@ uv run python scripts/create_visualizations.py
 
 ## Output Files
 
-### Primary Output: `data/output/county_forest_rents_panel.csv`
+### Primary Output: `data/output/county_timber_prices_panel.csv`
 
 | Column | Description |
 |--------|-------------|
@@ -75,7 +75,7 @@ uv run python scripts/create_visualizations.py
 ## Project Structure
 
 ```
-forest-rents/
+timber-prices/
 ├── data/
 │   ├── raw/                    # Downloaded source data
 │   │   ├── tpo/                # Timber Product Output
@@ -87,7 +87,7 @@ forest-rents/
 │   ├── download_data.py        # Download all data sources
 │   ├── process_data.py         # Process and estimate rents
 │   └── create_visualizations.py # Generate maps and charts
-├── src/forest_rents/           # Python package
+├── src/timber_prices/           # Python package
 │   ├── config.py               # Configuration settings
 │   ├── tpo_client.py           # TPO data access
 │   ├── fia_client.py           # FIA data access

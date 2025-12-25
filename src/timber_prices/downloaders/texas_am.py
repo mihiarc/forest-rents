@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 from rich.console import Console
 from rich.table import Table
 
-from forest_rents.downloaders.base import BaseDownloader
+from timber_prices.downloaders.base import BaseDownloader
 
 console = Console()
 

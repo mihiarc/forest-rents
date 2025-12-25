@@ -27,7 +27,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from forest_rents.downloaders import (
+from timber_prices.downloaders import (
     USFSPNWDownloader,
     NCStateDownloader,
     TexasAMDownloader,
@@ -269,7 +269,7 @@ def main():
     print_summary(results)
 
     # Save download manifest
-    from forest_rents.config import get_settings
+    from timber_prices.config import get_settings
     import json
     from datetime import datetime
 

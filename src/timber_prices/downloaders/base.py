@@ -8,7 +8,7 @@ import httpx
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, DownloadColumn
 
-from forest_rents.config import get_settings
+from timber_prices.config import get_settings
 
 console = Console()
 
@@ -22,7 +22,7 @@ class BaseDownloader(ABC):
             timeout=60.0,
             follow_redirects=True,
             headers={
-                "User-Agent": "Mozilla/5.0 (forest-rents research project)"
+                "User-Agent": "Mozilla/5.0 (timber-prices research project)"
             },
         )
 
