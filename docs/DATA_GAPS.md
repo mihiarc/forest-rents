@@ -13,6 +13,7 @@ This document tracks known data gaps and potential sources for expanding the uni
 | **Georgia** | 2024-2025 | Historical | TimberMart-South or UGA | Low |
 | **West Virginia** | 2010-2023 | 2024 | ✅ RESOLVED - Excel parsing | Done |
 | **Minnesota** | 2006-2023 | None | ✅ RESOLVED - Forest Resources report | Done |
+| **Oregon/Washington** | 1959-2022 | 2023-2024 | ✅ RESOLVED - USFS PNW Table 92 | Done |
 
 ---
 
@@ -236,6 +237,43 @@ The MN DNR stopped publishing standalone stumpage reports after 2021, but the an
 
 ### Source Note
 Data based on sales from Minnesota counties, Chippewa and Superior National Forests, Bureau of Indian Affairs, and Minnesota DNR-Forestry.
+
+---
+
+## Oregon/Washington (RESOLVED)
+
+### Current Status
+- **Coverage**: 1959-2022 (804 records)
+- **Gap**: 2023-2024 (minor - awaiting USFS update)
+
+### Resolution
+The USFS PNW Research Station publishes detailed stumpage price data for National Forest timber sales in Oregon and Washington, including species-specific prices.
+
+1. **Data Source**: USFS PNW Table 92
+   - URL: https://research.fs.usda.gov/pnw/products/dataandtools/production-prices-employment-and-trade-northwest-forest-industries-1958
+   - File: pnw-ppet-table92.xlsx (updated January 2024)
+
+2. **Parser Created**: `scripts/parse_usfs_pnw_species.py`
+   - Extracts species-specific stumpage prices from Table 92
+   - 12 species including Douglas-fir, Western hemlock, Sitka spruce
+
+3. **Integration**: `scripts/integrate_usfs_pnw_species.py`
+   - Replaced aggregate WA_OR data with species-detailed data
+   - 804 records with regional breakdown (Western/Eastern OR/WA)
+
+### Species Coverage
+- **Douglas-fir**: 154 records, 1959-2022, avg $149.99/MBF
+- **Western hemlock**: 64 records, 1959-2022, avg $93.88/MBF
+- **Sitka spruce**: 53 records, 1959-2022, avg $117.88/MBF
+- **Ponderosa pine**: 64 records, 1959-2022, avg $118.19/MBF
+- **Cedar**: 64 records, 1959-2022, avg $178.34/MBF
+- Plus 7 additional species (larch, lodgepole pine, sugar pine, etc.)
+
+### Source Note
+Data represents National Forest administered timber sales (not private market transactions). Prices are stumpage values at point of sale.
+
+### Future Updates
+USFS PNW updates data annually (typically January). Check for 2023-2024 data at the USFS website.
 
 ---
 
