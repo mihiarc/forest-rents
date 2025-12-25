@@ -837,6 +837,79 @@ def load_kentucky():
     })
 
 
+def load_tennessee():
+    """Load Tennessee Forest Products Bulletin data.
+
+    Note: Tennessee reports DELIVERED prices to mills, not stumpage.
+    To estimate stumpage, subtract approximately:
+    - Sawtimber: $60-100/MBF
+    - Pulpwood: $12-18/ton
+    """
+    path = BASE_PATH / "tn_forestry" / "tn_stumpage_parsed.csv"
+    if not path.exists():
+        return pd.DataFrame()
+
+    df = pd.read_csv(path)
+
+    return pd.DataFrame({
+        'source': 'TN',
+        'year': df['year'],
+        'quarter': df['quarter'],
+        'period_type': 'quarterly',
+        'region': df['region'],
+        'county': None,
+        'species': df['species'],
+        'product_type': df['product_type'].apply(standardize_product_type),
+        'price_avg': df['price_avg'],
+        'price_low': df.get('price_low'),
+        'price_high': df.get('price_high'),
+        'unit': df['unit'].apply(standardize_unit),
+        'sample_size': None,
+        'notes': df['notes']
+    })
+
+
+def load_new_hampshire():
+    """Load New Hampshire stumpage data from Figshare research dataset."""
+    path = BASE_PATH / "nh_dra" / "nh_stumpage_parsed.csv"
+    if not path.exists():
+        return pd.DataFrame()
+
+    df = pd.read_csv(path)
+
+    # Convert Q1, Q2, etc. to integers
+    def parse_quarter(q):
+        if pd.isna(q):
+            return None
+        q_str = str(q).upper()
+        if 'Q1' in q_str or q_str == '1':
+            return 1
+        elif 'Q2' in q_str or q_str == '2':
+            return 2
+        elif 'Q3' in q_str or q_str == '3':
+            return 3
+        elif 'Q4' in q_str or q_str == '4':
+            return 4
+        return None
+
+    return pd.DataFrame({
+        'source': 'NH',
+        'year': df['year'],
+        'quarter': df['quarter'].apply(parse_quarter),
+        'period_type': 'quarterly',
+        'region': df['region'],
+        'county': None,
+        'species': df['species'],
+        'product_type': df['product_type'].apply(standardize_product_type),
+        'price_avg': df['price_avg'],
+        'price_low': df.get('price_low'),
+        'price_high': df.get('price_high'),
+        'unit': df['unit'].apply(standardize_unit),
+        'sample_size': None,
+        'notes': df.get('notes')
+    })
+
+
 def main():
     console.print("[bold blue]Combining Stumpage Price Data from 21+ States[/bold blue]\n")
 
@@ -865,6 +938,8 @@ def main():
         ('Ohio', load_ohio),
         ('Indiana', load_indiana),
         ('Kentucky', load_kentucky),
+        ('Tennessee', load_tennessee),
+        ('New Hampshire', load_new_hampshire),
     ]
 
     # Load all data
