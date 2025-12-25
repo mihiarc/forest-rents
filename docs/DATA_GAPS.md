@@ -12,6 +12,7 @@ This document tracks known data gaps and potential sources for expanding the uni
 | **California** | 2019-2025 | 2009-2018 | Contact CDTFA | Medium |
 | **Georgia** | 2024-2025 | Historical | TimberMart-South or UGA | Low |
 | **West Virginia** | 2010-2023 | 2024 | ✅ RESOLVED - Excel parsing | Done |
+| **Minnesota** | 2006-2023 | None | ✅ RESOLVED - Forest Resources report | Done |
 
 ---
 
@@ -202,6 +203,39 @@ The WV Division of Forestry publishes annual timber market reports in Excel form
 ### Remaining Minor Gap
 - **2021**: Missing from available reports
 - **2024**: Not yet published (check early 2025)
+
+---
+
+## Minnesota (RESOLVED)
+
+### Current Status
+- **Coverage**: 2006-2023 (526 records)
+- **Gap**: None - fully current
+
+### Resolution
+The MN DNR stopped publishing standalone stumpage reports after 2021, but the annual "Minnesota Forest Resources" report contains the same price tables.
+
+1. **Data Source**: MN Forest Resources Report 2023
+   - URL: https://files.dnr.state.mn.us/forestry/um/forest-resources-report-2023.pdf
+   - Chapter 6 contains stumpage price tables (pages 91-94)
+
+2. **Parser Created**: `scripts/parse_mn_forest_resources.py`
+   - Extracts Tables 6-1, 6-2, 6-3 from Forest Resources reports
+   - Pulpwood, Pulp & Bolts, and Sawtimber prices
+   - 17 species, annual data 2013-2023
+
+3. **Integration**: `scripts/integrate_mn_forest_resources.py`
+   - Combined with existing 2006-2012 data
+   - Total 526 MN records in unified dataset
+
+### Data Coverage
+- **Years**: 2006-2023 (18 years)
+- **Species**: 17-25 depending on year
+- **Products**: Cordwood ($/cord), Sawtimber ($/MBF)
+- **Region**: Statewide averages from public agencies
+
+### Source Note
+Data based on sales from Minnesota counties, Chippewa and Superior National Forests, Bureau of Indian Affairs, and Minnesota DNR-Forestry.
 
 ---
 
