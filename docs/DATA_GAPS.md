@@ -11,6 +11,7 @@ This document tracks known data gaps and potential sources for expanding the uni
 | **Kentucky** | 2024 Q3-Q4 only | Historical (pre-2024), OCR needed | OCR for PDFs, contact state | Medium |
 | **California** | 2019-2025 | 2009-2018 | Contact CDTFA | Medium |
 | **Georgia** | 2024-2025 | Historical | TimberMart-South or UGA | Low |
+| **West Virginia** | 2010-2023 | 2024 | ✅ RESOLVED - Excel parsing | Done |
 
 ---
 
@@ -167,6 +168,40 @@ Only 2 years of structured GA DOR data available in parsed form. UGA Extension o
 
 3. **Contact GA DOR**
    - Request historical Owner Harvest Timber Value reports
+
+---
+
+## West Virginia (RESOLVED)
+
+### Current Status
+- **Coverage**: 2010-2023 (196 records)
+- **Gap**: 2024 (minor - awaiting next annual report)
+
+### Resolution
+The WV Division of Forestry publishes annual timber market reports in Excel format. These were successfully parsed:
+
+1. **Excel Files Downloaded**:
+   - `wv_timber_2022.xlsx` - 2022 annual report
+   - `wv_timber_2024.xls` - Contains both 2022 and 2023 data
+
+2. **Parser Created**: `scripts/parse_wv_excel.py`
+   - Extracts 14 species across 5 regions
+   - Handles complex Excel layout with side-by-side year data
+   - Outputs standardized CSV format
+
+3. **Integration**: `scripts/integrate_wv_forestry.py`
+   - Added 196 WV records to unified dataset
+   - Years: 2010, 2011, 2015, 2017-2020, 2022-2023
+
+### Data Source
+- **URL**: https://wvforestry.com/programs/timber-market-report/
+- **Format**: Annual Excel reports
+- **Regions**: Eastern Panhandle, Northwestern, Southwestern, Southern, Northeastern
+- **Species**: 14 hardwood and softwood species
+
+### Remaining Minor Gap
+- **2021**: Missing from available reports
+- **2024**: Not yet published (check early 2025)
 
 ---
 
